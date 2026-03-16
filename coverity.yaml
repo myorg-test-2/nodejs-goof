@@ -1,3 +1,5 @@
 capture:
   files:
     exclude-regex: '(^|[/\\])(?i:tests|test|__tests__|spec)[/\\]'
+
+base-check-set: owasp-top-10-2021
