@@ -26,3 +26,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SIGMA_BASE_CHECK_SET: 'owasp-web-top-10-2021'
+          SIGMA_ENABLE: 'SQLI,XSS'
+
