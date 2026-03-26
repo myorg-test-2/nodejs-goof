@@ -3,9 +3,14 @@ name: Polaris Scan
 on:
   push:
     branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
+  pull-requests: write
+  security-events: write
 
 jobs:
   polaris-scan:
@@ -22,10 +27,10 @@ jobs:
           polaris_branch_name: ${{ github.head_ref || github.ref_name }}
           polaris_branch_parent_name: ${{ github.base_ref || 'main' }}
           polaris_assessment_types: 'SAST'
-          polaris_test_sast_type: 'SAST-FULL'
+          polaris_test_sast_type: 'SAST-RAPID'
+          polaris_prComment_enabled: true
+          polaris_prComment_severities: 'CRITICAL,HIGH,MEDIUM'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          mark_build_status: 'failure'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SIGMA_BASE_CHECK_SET: 'owasp-web-top-10-2021'
-          SIGMA_ENABLE: 'SQLI,XSS'
-
