@@ -365,3 +365,29 @@ exports.chat = {
     res.send({ ok: true });
   }
 };
+
+// Vulnerable endpoint: SQL injection via user input
+router.get('/search', function(req, res) {
+    var searchTerm = req.query.q;
+    var query = "SELECT * FROM products WHERE name LIKE '%" + searchTerm + "%'";
+    res.send("Searching for: " + query);
+});
+
+// Vulnerable endpoint: XSS via reflected input
+router.get('/greet', function(req, res) {
+    var name = req.query.name;
+    res.send("<h1>Hello " + name + "</h1>");
+});
+
+// Vulnerable endpoint: path traversal
+router.get('/file', function(req, res) {
+    var filename = req.query.name;
+    var fs = require('fs');
+    var content = fs.readFileSync('/data/' + filename, 'utf8');
+    res.send(content);
+});
+// PR flow build break test - Thu Mar 26 02:22:27 PM CST 2026
+// Build break test 142749
+// Final build break test 143201
+// FINAL build break test - branch policy enabled 143948
+// SCM event-based test Thu Mar 26 07:51:39 PM CST 2026
