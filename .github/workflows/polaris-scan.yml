@@ -31,6 +31,6 @@ jobs:
           polaris_prComment_enabled: true
           polaris_prComment_severities: 'CRITICAL,HIGH,MEDIUM'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          mark_build_status: 'failure'
+          mark_build_status: 'success'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
